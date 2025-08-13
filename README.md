@@ -49,3 +49,17 @@ Thank you!
 https://osintframework.com
 
 Happy Hunting!
+<details>
+  <summary>► Click here to see the details</summary>
+  
+  This is the hidden content! You can include:
+  
+  - Lists
+  - **Formatting**
+  - Links: [GitHub](https://github.com)
+  - And even code blocks:
+  
+  ```javascript
+  console.log("Hello, collapsible world!");
+  ```
+</details>
