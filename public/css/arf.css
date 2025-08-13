@@ -1,62 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+/* 2. Keyframe Animations for Flicker and Cursor */
+@keyframes flicker {
+  0% { opacity: 0.27; } 5% { opacity: 0.34; } 10% { opacity: 0.23; }
+  15% { opacity: 0.90; } 20% { opacity: 0.18; } 25% { opacity: 0.83; }
+  30% { opacity: 0.65; } 35% { opacity: 0.67; } 40% { opacity: 0.26; }
+  45% { opacity: 0.84; } 50% { opacity: 0.96; } 55% { opacity: 0.08; }
+  60% { opacity: 0.20; } 65% { opacity: 0.71; } 70% { opacity: 0.53; }
+  75% { opacity: 0.37; } 80% { opacity: 0.71; } 85% { opacity: 0.70; }
+  90% { opacity: 0.70; } 95% { opacity: 0.36; } 100% { opacity: 0.24; }
+}
+
+@keyframes cursorBlink {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* 3. Main Body and CRT Screen Effect */
 body {
-  background-color: #ffffff;
-  font-size: 14px;
-  font-family: "Helvetica Neue", Helvetica;
+    background-color: #0a1a0a; /* Dark green-black background */
+    color: #30ff50;            /* Bright green text */
+    font-family: 'VT323', monospace; /* Thematic monospace font */
+    font-size: 20px;
+    text-shadow: 0 0 3px #1a6b2a, 0 0 5px #30ff50; /* Text glow */
+    margin: 0 auto;
+    position: relative;
+    /* SCROLLBAR FIX: The 'overflow: hidden;' was removed to enable scrolling. */
 }
 
-#body {
-  margin: 0 auto;
-  position: relative;
+/* Scanline overlay effect */
+body::after {
+    content: " ";
+    display: block;
+    position: fixed; /* Use fixed positioning to prevent it from affecting scroll */
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 2;
+    background-size: 100% 4px, 3px 100%;
+    pointer-events: none; /* User clicks go through the overlay */
+    animation: flicker 0.15s infinite;
 }
 
+/* 4. Page Structure Elements (Using your IDs and Classes) */
 #header {
-  font-size: 40px;
-  font-weight: bold;
-  top: 20px;
-  text-align: center;
+    font-size: 12px;
+    font-weight: normal;
+    text-align: center;
+    color: #80ff9a;
+    letter-spacing: 3px;
+    padding: 20px 0;
 }
 
-.dark-Mode{
-  background-color: #000;
-  color: #fff;
-  .node text {
-    fill: #fff;
-  }
-  .legend{
-    color: #fff;
-  }
-  path.link{
-    stroke: #444;
-  }
+/* Add blinking cursor to the header */
+#header::after {
+    content: 'Version 0.1';
+    animation: cursorBlink 1s step-end infinite;
+    margin-left: 10px;
+    color: #30ff50;
 }
 
 .legend {
   position: absolute;
-  top: 0px;
-  right: 0;
-  width: 330px;
-  font-size: 11px;
-  color: #000;
+  top: 70px;
+  right: 10px;
+  width: 300px;
+  height: 700px;
+  font-size: 12px;
+  color: #30ff50;
+  border: 2px solid #30ff50;
+  padding: 10px;
+  background-color: rgba(10, 26, 10, 0.8); /* Semi-transparent background */
+  z-index: 5; /* Ensure legend is above graph */
 }
+
+/* 5. D3.js Graph Styling (Using your EXACT class names) */
 
 .node {
   cursor: pointer;
 }
 
 .node circle {
-  cursor: pointer;
-  fill: #fff;
-  stroke: steelblue;
-  stroke-width: 1.5px;
+  fill: #0a1a0a;
+  stroke: #30ff50;
+  stroke-width: 2px;
 }
 
 .node text {
+  font-family: 'VT323', monospace;
   font-size: 12px;
-  fill: rgb(0, 0, 0);
+  fill: #30ff50;
+  text-shadow: 0 0 3px #1a6b2a;
 }
 
+/* Style for when you hover over a node */
+.node:hover circle {
+    fill: #30ff50; /* Highlight color for the circle */
+}
+
+.node:hover text {
+    /* HOVER TEXT FIX: Changed from black to bright white for high contrast */
+    fill: #ffffff;
+    text-shadow: 1px 1px 2px #000000; /* Add shadow to pop against the green */
+}
+
+/* This is the connecting line */
 path.link {
   fill: none;
-  stroke: #ccc;
-  stroke-width: 1px;
+  stroke: #2e793e; /* Dark, moody green for the connections */
+  stroke-width: 1.5px;
+}
+
+/* 6. General Styling */
+a {
+    color: #80ff9a;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #0a1a0a;
+    background-color: #80ff9a;
+}
+
+/* Remove modern effects like rounded corners */
+* {
+    border-radius: 0 !important;
+    box-shadow: none !important;
 }
