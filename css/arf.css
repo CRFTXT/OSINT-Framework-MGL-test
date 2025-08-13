@@ -129,3 +129,32 @@ a:hover {
     border-radius: 0 !important;
     box-shadow: none !important;
 }
+
+#legend-toggle-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: 1px solid #30ff50;
+  color: #30ff50;
+  font-family: 'VT323', monospace;
+  font-size: 16px;
+  padding: 2px 8px;
+  cursor: pointer;
+}
+
+#legend-toggle-btn:hover {
+  background-color: #30ff50;
+  color: #0a1a0a;
+}
+
+/* 2. Add a transition to the main legend for a smooth fade */
+.legend {
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* 3. The class that makes the legend invisible */
+.legend-hidden {
+  opacity: 0;
+  pointer-events: none; /* Make it non-clickable when hidden */
+}
