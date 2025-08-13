@@ -154,3 +154,29 @@ function goDark() {
   var element = document.body;
   element.classList.toggle("dark-Mode");
 } 
+/* --- Legend Toggle Functionality --- */
+
+// Wait for the page to fully load before trying to find elements
+document.addEventListener('DOMContentLoaded', function() {
+
+  const toggleButton = document.getElementById('legend-toggle-btn');
+  const legend = document.querySelector('.legend');
+
+  // Check if both the button and legend exist
+  if (toggleButton && legend) {
+    
+    // Listen for a click on the button
+    toggleButton.addEventListener('click', function() {
+      
+      // Add or remove the 'legend-hidden' class from the legend
+      legend.classList.toggle('legend-hidden');
+
+      // Check if the legend is now hidden to update the button's text
+      if (legend.classList.contains('legend-hidden')) {
+        toggleButton.textContent = '[Show]';
+      } else {
+        toggleButton.textContent = '[Hide]';
+      }
+    });
+  }
+});
