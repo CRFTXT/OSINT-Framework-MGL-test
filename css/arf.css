@@ -71,7 +71,6 @@ body::after {
   padding: 10px;
   background-color: rgba(10, 26, 10, 0.8); /* Semi-transparent background */
   z-index: 5; /* Ensure legend is above graph */
-  pointer-events: none;
   background-color: rgba(10, 26, 10, 0.2);
   border: 1px solid rgba(48, 255, 80, 0.3);
 }
